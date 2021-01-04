@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <Configurations>Debug;Release;DebugNoUI</Configurations>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ttc.model.cdl\ttc.model.aslink\TtcModel2015.AgencyList.cs" Link="TTC.Model.AsLink\TtcModel2015.AgencyList.cs" />
+    <Compile Include="..\ttc.model.cdl\ttc.model.aslink\TtcModel2015.RouteConfig.cs" Link="TTC.Model.AsLink\TtcModel2015.RouteConfig.cs" />
+    <Compile Include="..\ttc.model.cdl\ttc.model.aslink\TtcModel2015.RouteList.cs" Link="TTC.Model.AsLink\TtcModel2015.RouteList.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Local\" />
+    <Folder Include="NextBus\" />
+    <Folder Include="Svc\" />
+    <Folder Include="TTC.Model.AsLink\" />
+  </ItemGroup>
+
+</Project>

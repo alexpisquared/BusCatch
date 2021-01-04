@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusCatch", "BusCatch\BusCatch.csproj", "{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		DebugNoUI|Any CPU = DebugNoUI|Any CPU
+		DebugNoUI|ARM = DebugNoUI|ARM
+		DebugNoUI|x64 = DebugNoUI|x64
+		DebugNoUI|x86 = DebugNoUI|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|Any CPU.Build.0 = Debug|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|ARM.Build.0 = Debug|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|ARM.Deploy.0 = Debug|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|x64.ActiveCfg = Debug|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|x64.Build.0 = Debug|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|x64.Deploy.0 = Debug|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|x86.ActiveCfg = Debug|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|x86.Build.0 = Debug|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Debug|x86.Deploy.0 = Debug|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|Any CPU.ActiveCfg = DebugNoUI|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|ARM.ActiveCfg = DebugNoUI|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|ARM.Build.0 = DebugNoUI|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|ARM.Deploy.0 = DebugNoUI|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|x64.ActiveCfg = DebugNoUI|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|x64.Build.0 = DebugNoUI|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|x64.Deploy.0 = DebugNoUI|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|x86.ActiveCfg = DebugNoUI|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|x86.Build.0 = DebugNoUI|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.DebugNoUI|x86.Deploy.0 = DebugNoUI|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|Any CPU.ActiveCfg = Release|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|ARM.ActiveCfg = Release|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|ARM.Build.0 = Release|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|ARM.Deploy.0 = Release|ARM
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|x64.ActiveCfg = Release|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|x64.Build.0 = Release|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|x64.Deploy.0 = Release|x64
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|x86.ActiveCfg = Release|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|x86.Build.0 = Release|x86
+		{895A34AF-35C2-4C91-BF2D-A8C38B03B32E}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5521ED1-D953-41F8-BDC5-E733207CE719}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://alexpi.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BusCatch\\BusCatch.csproj
+		SccProjectName1 = BusCatch
+		SccLocalPath1 = BusCatch
+	EndGlobalSection
+EndGlobal

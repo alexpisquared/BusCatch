@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="BusCatch.Views.MappedVhclsUsrCtrl"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  xmlns:local="using:BusCatch.Views"  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  mc:Ignorable="d"  d:DesignHeight="300"  d:DesignWidth="400"
+             xmlns:Views="using:BusCatch.Views" 
+             xmlns:VwMdl="using:BusCatch.VwMdl"      
+             xmlns:cvr="using:TTC.WP.Misc" 
+             xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"              >
+    <UserControl.Resources>
+        <!--<cvr:StringFormatConverter x:Key="StringFormatConverter"/>-->
+    </UserControl.Resources>
+
+    <Grid>
+
+        <maps:MapControl x:Name="map1" MapServiceToken="5o5HfE7jKzKpmWVUcyVy~w53PJhWAaGi6M4P6FPUwRg~AncNCTT3_76dDeHFTGrWOL4Mso9NgIjlW5otHar99LQzC6DawcGGLrqnPqbPVjJQ" 
+                     TransitFeaturesVisible="True" ZoomInteractionMode="GestureAndControl" RequestedTheme="Dark" ZoomLevel="3" 
+                     ColorScheme="Light" d:IsHidden="False"                     >
+            <maps:MapItemsControl ItemsSource="{x:Bind VwMdl.VLocnPredOC, Mode=OneWay}"  >
+                <maps:MapItemsControl.ItemTemplate>
+                    <!--<DataTemplate x:DataType="VwMdl:TtcViewModel" >            <Views:VehMapItemUsrCtrl Visibility="{x:Bind  BusImgVsblty, Mode=OneWay}" >            <Views:VehMapItemUsrCtrl Visibility="{Binding BusImgVsblty, Mode=OneWay}" >          -->
+                    <DataTemplate >
+                        <Views:VehMapItemUsrCtrl VerticalAlignment="Bottom" />
+                        <!--
+            using this here makes busses to fly away on map panning:
+            <Grid Height="35" Width="40"  RenderTransformOrigin="0,0" maps:MapControl.Location="{Binding Location}" >
+              <Grid.RenderTransform>
+                <CompositeTransform     Rotation="{Binding HeadingPos, FallbackValue='-135'}"/>
+              </Grid.RenderTransform>
+              <Image Height="11" Source="ms-appx:///Assets/Bus01.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+              <TextBlock Foreground="{Binding DataContext.BusTextClr, FallbackValue='#fff', ElementName=map1}"
+               Text="{Binding SmartMinSecLbl, FallbackValue='33:', ConverterParameter=\{0:N1\}, Converter={StaticResource StringFormatConverter}}" 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                  <CompositeTransform   Rotation="{Binding HeadingNeg, FallbackValue='+135'}"/>
+                </TextBlock.RenderTransform>
+              </TextBlock>
+            </Grid>-->
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+        </maps:MapControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,207 @@
+﻿<Page x:Class="BusCatch.MainPage"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  xmlns:local="using:BusCatch"  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    mc:Ignorable="d"
+      xmlns:Views="using:BusCatch.Views" 
+      NavigationCacheMode="Enabled" d:DesignWidth="700" Background="Transparent">
+  <Page.Resources>
+    <Storyboard x:Name="SpinnerStoryboard">
+      <DoubleAnimation Duration="00:00:00.5" FillBehavior="HoldEnd" From="0" To="360" RepeatBehavior="Forever" Storyboard.TargetName="SpinnerTransform" Storyboard.TargetProperty="Angle" />
+    </Storyboard>
+  </Page.Resources>
+  <Page.Transitions>
+    <TransitionCollection>
+      <EntranceThemeTransition />
+    </TransitionCollection>
+  </Page.Transitions>
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="LayoutRoot" >
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition Width="3*" />
+    </Grid.ColumnDefinitions>
+
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup x:Name="AdaptiveStates" >
+        <!--<VisualStateGroup.Transitions>
+          <VisualTransition To="MiniState" GeneratedDuration="0:0:1"/>
+          <VisualTransition To="MaxdState" GeneratedDuration="0:0:1"/>
+        </VisualStateGroup.Transitions>-->
+        <VisualState x:Name="MaxdState">
+          <VisualState.StateTriggers>
+            <AdaptiveTrigger MinWindowWidth="520.00" />
+          </VisualState.StateTriggers>
+          <VisualState.Setters>
+            <Setter Target="devop.Text" Value="" />
+            <!--<Setter Target="devop.Text" Value="Maxi-ed" />-->
+            <!--<Setter Target="pnlMapr.Margin" Value="{Binding FavColThick, Mode=TwoWay}" />-->
+            <!--Crashes on startup when maxied????????-->
+            <Setter Target="pnlSlct.VerticalAlignment" Value="Top" />
+          </VisualState.Setters>
+        </VisualState>
+        <VisualState x:Name="MiniState">
+          <VisualState.StateTriggers>
+            <AdaptiveTrigger MinWindowWidth="1"/>
+          </VisualState.StateTriggers>
+          <VisualState.Setters>
+            <Setter Target="devop.Text" Value="Mini-ed" />
+            <Setter Target="pnlMapr.Margin" Value="0" />
+            <!--<Setter Target="pnlSlct.MinWidth" Value="100" />-->
+            <Setter Target="pnlSlct.VerticalAlignment"   Value="Bottom" />
+            <!--<Setter Target="pnlCmnd.HorizontalAlignment" Value="Center" />-->
+          </VisualState.Setters>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
+    <Views:MappedVhclsUsrCtrl Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" x:Name="pnlMapr"   Margin="{Binding FavColThick, Mode=TwoWay}" />
+
+    <TextBlock Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="2" x:Name="devop"  Text="{Binding VisState, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="22" Foreground="Red" Visibility="{Binding DevOpsVsblty}" />
+
+    <Grid                     Grid.Row="0" Grid.ColumnSpan="2"   Background="{Binding MsgBrdColor, FallbackValue='#f0c0'}" Visibility="{Binding MsgBrdVsblty, FallbackValue='Visible'}" HorizontalAlignment="Center" x:Name="msgBrd">
+      <ProgressBar  Maximum="{Binding ProgrsMax}" Value="{Binding ProgrsVal}" Background="Transparent" MinWidth="420.00" Height="2" VerticalAlignment="Top" />
+      <!--<ProgressRing />-->
+      <TextBlock Foreground="#fff" Margin="4"      Text="{Binding MsgBrdText,  FallbackValue='MsgBrdText'}" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Center" />
+    </Grid>
+
+    <Grid                     Grid.Row="1" Grid.RowSpan="3" x:Name="pnlSlct" MinWidth="{Binding FavColWidth}" HorizontalAlignment="Left" VerticalAlignment="Top" >
+      <Views:StopLocatorUsrCtrl  Visibility="{Binding RouteLstVsblty, FallbackValue=Collapsed}" />
+      <!--<Views:StopRemoverUsrCtrl  Visibility="{Binding RmvFvsVsblty, FallbackValue=Collapsed}" />-->
+    </Grid>
+
+    <TextBlock  Grid.Row="3" Grid.ColumnSpan="2" Foreground="#f0f" x:Name="zm0" FontSize="13" Margin="4 0" Text="{Binding ZoomLvl, FallbackValue='ZoomLvl'}"        HorizontalAlignment="Right"  VerticalAlignment="Top"    Visibility="{Binding DevOpsVsblty}" />
+    <TextBlock  Grid.Row="3" Grid.ColumnSpan="2" Foreground="#8ff" x:Name="btm" FontSize="13" Margin="4 0" Text="{Binding TagSeln, FallbackValue='TagS'}"           HorizontalAlignment="Right"  VerticalAlignment="Center" Visibility="{Binding DevOpsVsblty}" />
+
+    <StackPanel Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#1000" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+      <AppBarButton Grid.Row="3" Icon="Admin"    Visibility="{Binding DevOpsVsblty}"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="#c00" >
+        <Button.Flyout>
+          <MenuFlyout>
+            <MenuFlyoutItem       Icon="Delete"       Text="Clear ExnMsg"		   Click="onClearExeptionMsg"  ToolTipService.ToolTip="Clear tbError"	Foreground="#f44" />
+            <MenuFlyoutItem       Icon="Calculator"   Text="Show Msg Brd"      Click="onMakeVisible"                 />
+            <MenuFlyoutItem       Icon="Scan"         Text="SizeToStd1366x768" Click="onSizeToStd1366x768 "          />
+            <ToggleMenuFlyoutItem Icon="Zoom"         Text="Auto-Zoom"        IsChecked="{Binding IsZ2P, Mode=TwoWay}" Foreground="#18e" ToolTipService.ToolTip="Auto-zoom to 3-4 Predicted on each position change." />
+            <ToggleMenuFlyoutItem                     Text="All or Predicted" IsChecked="{Binding IsAll, Mode=TwoWay}"               Foreground="#e81" ToolTipService.ToolTip="Display All vs. Predicted only vehicles on the route." />
+            <ToggleMenuFlyoutItem                     Text="GeoTracking     " IsChecked="{Binding IsTrackingLocation, Mode=TwoWay}"  Foreground="#1c8" ToolTipService.ToolTip="Save battery by not tracking." />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutSubItem      Icon="More"         Text="Future Features..."  Foreground="#888" >
+              <MenuFlyoutSubItem.Items>
+                <ToggleMenuFlyoutItem Text="Lock Orientation"  IsChecked="{Binding IsRouteListVw, Mode=TwoWay}"  ToolTipService.ToolTip="Lock Orientation"    />
+                <ToggleMenuFlyoutItem Text="Multi Stop Mode"   IsChecked="{Binding IsOn02, Mode=TwoWay}" ToolTipService.ToolTip="Include all favorite stops in 2km radius" />
+                <ToggleMenuFlyoutItem Text="Audio"             IsChecked="{Binding IsVrbl, Mode=TwoWay}" ToolTipService.ToolTip="Toggle Audio (On/Off)" />
+                <MenuFlyoutSeparator />
+                <MenuFlyoutSubItem    Text="Privacy Policy... DevDbg" Foreground="#080" >
+                  <MenuFlyoutSubItem.Items>
+                    <MenuFlyoutSubItem >
+                      <MenuFlyoutSubItem.Text>Your privacy is important to us. This application uses your current location to center the latest Doppler radar image of the atmospheric precipitation. This may be stored to conserve battery power. At any time, you may disable Location Services and enter your location manually. In fact, the most optimal way is to get the location once and update it only as needed. If you have any questions, contact me at alex.pigida@live.com.</MenuFlyoutSubItem.Text>
+                    </MenuFlyoutSubItem>
+                  </MenuFlyoutSubItem.Items>
+                </MenuFlyoutSubItem>
+              </MenuFlyoutSubItem.Items>
+            </MenuFlyoutSubItem>
+          </MenuFlyout>
+        </Button.Flyout>
+      </AppBarButton>
+      <AppBarButton Icon="World" ToolTipService.ToolTip="Map Style" IsCompact="True" >
+        <Button.Flyout>
+          <Flyout>
+            <StackPanel>
+              <RadioButton       Content="None"      IsChecked="{Binding MvNone, Mode=TwoWay}" />
+              <RadioButton       Content="Road"      IsChecked="{Binding MvRoad, Mode=TwoWay}" />
+              <RadioButton       Content="Aerial"    IsChecked="{Binding MvAeri, Mode=TwoWay}" />
+              <RadioButton       Content="Ae+Rd"     IsChecked="{Binding MvAeRd, Mode=TwoWay}" />
+              <RadioButton       Content="Terrain"   IsChecked="{Binding MvTern, Mode=TwoWay}" />
+              <MenuFlyoutSeparator/>
+              <ToggleMenuFlyoutItem Text="Traffic"   IsChecked="{Binding MvTrfc, Mode=TwoWay}" ToolTipService.ToolTip="Show Traffic" />
+              <MenuFlyoutSeparator/>
+              <HyperlinkButton Content="Send Feedback" NavigateUri="mailto:pigida@live.com?subject=BusCatch App Feedback&amp;body=Hey Alex, &#10;&#13;I like your app, but here is what I think you need to do... &#10;&#13;&#10;&#13;Cheers, &#10;&#13;&#13;[My Name]"  />
+            </StackPanel>
+          </Flyout>
+        </Button.Flyout>
+      </AppBarButton>
+      <AppBarToggleButton  IsCompact="False" Icon="Target"   IsChecked="{Binding IsTrackingLocation, Mode=TwoWay}"     Command="{Binding ToHereCmd}" VerticalAlignment="Bottom"             ToolTipService.ToolTip="Center at current location. Save battery by not tracking." />
+    </StackPanel>
+
+    <StackPanel Grid.Row="3" Grid.ColumnSpan="2" x:Name="pnlCmnd" Background="#1000" Orientation="Vertical" HorizontalAlignment="Right" >
+      <AppBarButton       Icon="More"         >
+        <Button.Flyout>
+          <MenuFlyout>
+            <ToggleMenuFlyoutItem Text="Lock Portrait"		Foreground="#d6e"   Click="onLockP" x:Name="tgLockP"   />
+            <ToggleMenuFlyoutItem Text="Lock Landscape"		Foreground="#d6e"   Click="onLockL" x:Name="tgLockL"   />
+            <MenuFlyoutSeparator  />
+            <ToggleMenuFlyoutItem Text="Change Agency"      Foreground="#880" Command="{Binding StartAgencySelnCmd}"  IsChecked="{Binding IsAgncySelnVw,  Mode=TwoWay}" ToolTipService.ToolTip="Select Agency"              />
+            <ToggleMenuFlyoutItem Text="Show Route List"    Foreground="#880" Command="{Binding StartRoutesSelnCmd}"  IsChecked="{Binding IsRouteListVw,  Mode=TwoWay}" ToolTipService.ToolTip="Edit Favorite Stops"     />
+            <ToggleMenuFlyoutItem Text="Start Tracking"     Foreground="#880" Command="{Binding StartVehTrackngCmd}"  IsChecked="{Binding IsVehTracngVw,  Mode=TwoWay}" ToolTipService.ToolTip="Start Vehicle Tracking"  />
+            <MenuFlyoutSeparator  />
+            <ToggleMenuFlyoutItem Text="Privacy Policy..."  Foreground="#090" Command="{Binding StartPrivacyPlcCmd}"  IsChecked="{Binding IsPrivacyPlcVw,  Mode=TwoWay}" ToolTipService.ToolTip="Show Privacy Policy" />
+            <ToggleMenuFlyoutItem Text="DevOps"             Foreground="#06d" IsChecked="{Binding DevOps, Mode=TwoWay}" ToolTipService.ToolTip="Dev Ops visbility switch." />
+          </MenuFlyout>
+        </Button.Flyout>
+      </AppBarButton>
+      <AppBarToggleButton IsCompact="True" Icon="Volume"       IsChecked="{Binding IsVrbl, Mode=TwoWay}" ToolTipService.ToolTip="Toggle Audio (On/Off)" />
+    </StackPanel>
+
+
+    <Grid       Grid.Row="4" Grid.ColumnSpan="2" Background="#fc0" Visibility="{Binding LetLcnVsblty, FallbackValue='Visible'}">
+      <TextBlock Foreground="#555" Margin="4" TextWrapping="Wrap" FontStyle="Italic" >
+                <Run Text="Application is not able to get location data. Go to " />
+                <Hyperlink NavigateUri="ms-settings:privacy-location">
+                    <Run Text="Settings" />
+                </Hyperlink>
+                <Run Text=" to check the location permissions."/>
+      </TextBlock>
+
+    </Grid>
+
+    <Border Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="3" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness=".6" BorderBrush="#8d8" Background="#ccfc" 
+            Visibility="{Binding VhStopMenuVis}" 
+            Margin="{Binding     VhStopMenuPsn}" >
+      <StackPanel Margin="4">
+        <TextBlock Text="{Binding VhStopMenuTtl, FallbackValue='Title'}" Width="120" Foreground="#060" TextWrapping="Wrap" FontWeight="SemiBold" />
+        <Button Command="{Binding Add2CurVSsCmd}" Content="Make Current" Width="120" Foreground="#060" Margin="4" Height="40" ToolTipService.ToolTip="Make this a current target stop" />
+        <Button Command="{Binding RemvFrmCurCmd}" Content="Remove CVSs"  Width="120" Foreground="#888" Margin="4" Height="40" ToolTipService.ToolTip="(Under construction)" />
+        <Button Command="{Binding DeletFavVSCmd}" Content="Delete Stop"  Width="120" Foreground="#d40" Margin="4" Height="40" ToolTipService.ToolTip="Delete from favourites" />
+        <!--
+                <Button Command="{Binding HideVSMenuCmd}" Content="Cancel"       Width="120" Foreground="#060" Margin="4" Height="40" ToolTipService.ToolTip="Display list of the agency's routes" />-->
+      </StackPanel>
+    </Border>
+
+
+    <Border Grid.RowSpan="4" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness=" 0 0 .6 .6" BorderBrush="#d00" Background="#1d00" CornerRadius="0 0 10 0">
+      <Grid>
+        <TextBlock Foreground="#d00" Margin="2 4 2 0" Text="Next (min):" FontWeight="SemiBold" FontSize="8" HorizontalAlignment="Center" TextAlignment="Right" />
+        <TextBlock Foreground="#d00" Margin="4 20"    Text="{Binding CornerLT,  FallbackValue='3 ·&#10;13 ·&#10;23 ·&#10;23 ·'}" FontWeight="SemiBold" FontSize="18" HorizontalAlignment="Center" TextAlignment="Right" xml:space="preserve"/>
+        <AppBarToggleButton          Margin="1" Opacity=".3" BorderThickness="1" BorderBrush="#d00" Height="48" Width="46" IsChecked="{Binding IsZ2P, Mode=TwoWay}" ToolTipService.ToolTip="Toggle Auto Zoom" />
+      </Grid>
+    </Border>
+
+
+    <Views:PrivacyPolicyUsrCtrl Visibility="{Binding PrivacyPlcVis}" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"  Margin="80 20" d:IsHidden="True" />
+    <AppBarButton               Visibility="{Binding PrivacyPlcVis}" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"  Margin="80 27" VerticalAlignment="Top" HorizontalAlignment="Left"  Command="{Binding StartPrivacyPlcCmd}"  ToolTipService.ToolTip="Hide Privacy Policy"  IsCompact="True" Foreground="#bfb" Icon="Back"   />
+    <AppBarButton               Visibility="{Binding PrivacyPlcVis}" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"  Margin="80 25" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding StartPrivacyPlcCmd}"  ToolTipService.ToolTip="Hide Privacy Policy"  IsCompact="True" Foreground="#bfb" Icon="Cancel" />
+
+    <TextBlock Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="50 0"  Foreground="#070" Text="{Binding CpuUse, Mode=OneWay, FallbackValue='CPU'}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Center" />
+    <Grid      Grid.RowSpan="3" Grid.ColumnSpan="3" Margin="140 5" HorizontalAlignment="Left" VerticalAlignment="Top" >
+      <!--
+        Arrow version:
+        <FontIcon Glyph="&#xED67;" FontFamily="Segoe MDL2 Assets" FontSize="22" Foreground="#8fff"  />
+      <FontIcon Glyph="&#xF0AD;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="#f080"  RenderTransformOrigin="0.5,0.5" >
+        <FontIcon.RenderTransform>
+          <RotateTransform x:Name="SpinnerTransform" Angle="{Binding Timer_360}" />
+        </FontIcon.RenderTransform>
+      </FontIcon>-->
+      <FontIcon Glyph="&#xED66;" FontFamily="Segoe MDL2 Assets" FontSize="22" Foreground="#800e"  />
+      <FontIcon Glyph="&#xED67;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="#800e" RenderTransformOrigin="0.5,0.05" Visibility="{Binding NotInWebCall}" >
+        <FontIcon.RenderTransform>
+          <RotateTransform x:Name="SpinnerTransform" Angle="{Binding Timer_360}" />
+        </FontIcon.RenderTransform>
+      </FontIcon>
+    </Grid>
+
+    <TextBlock Grid.ColumnSpan="2" Grid.RowSpan="5" x:Name="tbError" Foreground="#900" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="50 20" Visibility="{Binding DevOpsVsblty}" />
+
+  </Grid>
+</Page>
